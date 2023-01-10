@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+      /* Style the calculator */
+      .calculator {
+        width: 400px;
+        height: auto;
+        margin: 0 auto;
+        padding: 20px;
+        background: #9eebcf;
+        border-radius: 5px;
+      }
+      /* Style the buttons */
+      .calculator button {
+        cursor: pointer;
+        width: 20%;
+        height: 60px;
+        font-size: 20px;
+        background: #f4f4f4;
+        border: none;
+        border-radius: 5px;
+        margin: 0 0 10px 10px;
+        float: left;
+      }
+      /* Style the display */
+      .calculator input[type="text"] {
+        width: 100%;
+        height: 80px;
+        font-size: 25px;
+        margin-bottom: 20px;
+        border: none;
+        background: white;
+        text-align: right;
+        padding-right: 20px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Create the calculator -->
+    <div class="calculator">
+      <!-- Create the display -->
+      <input type="text" id="display" disabled />
+      <!-- Create the number buttons -->
+      <button onclick="addNumber(7)">7</button>
+      <button onclick="addNumber(8)">8</button>
+      <button onclick="addNumber(9)">9</button>
+      <button onclick="addOperator('/')">/</button>
+      <button onclick="addNumber(4)">4</button>
+      <button onclick="addNumber(5)">5</button>
+      <button onclick="addNumber(6)">6</button>
+      <button onclick="addOperator('*')">*</button>
+      <button onclick="addNumber(1)">1</button>
+      <button onclick="addNumber(2)">2</button>
+      <button onclick="addNumber(3)">3</button>
+      <button onclick="addOperator('-')">-</button>
+      <button onclick="addNumber(0)">0</button>
+      <button onclick="addOperator('+')">+</button>
+      <!-- Create the equals button -->
+      <button
+        onclick="calculate()"
+        style="height: 120px; font-size: 20px; margin-left: 10px"
+      >
+        =
+      </button>
+    </div>
+
+    <script>
+      // Define the variables
+      let display = document.getElementById("display");
+      let operator = "";
+      let firstNumber = "";
+      let secondNumber = "";
+      let result = "";
+      // Add a number to the display
+      function addNumber(number) {
+        if (operator === "") {
+          firstNumber += number;
+          display.value = firstNumber;
+        } else {
+          secondNumber += number;
+          display.value = secondNumber;
+        }
+      }
+      // Add an operator
+      function addOperator(op) {
+        if (firstNumber !== "") {
+          operator = op;
+        }
+      }
+      // Calculate the result
+      function calculate() {
+        if (firstNumber !== "" && secondNumber !== "" && operator !== "") {
+          switch (operator) {
+            case "+":
+              result = parseInt(firstNumber) + parseInt(secondNumber);
+              break;
+            case "-":
+              result = parseInt(firstNumber) - parseInt(secondNumber);
+              break;
+            case "*":
+              result = parseInt(firstNumber) * parseInt(secondNumber);
+              break;
+            case "/":
+              result = parseInt(firstNumber) / parseInt(secondNumber);
+              break;
+          }
+          display.value = result;
+          operator = "";
+          firstNumber = "";
+          secondNumber = "";
+          result = "";
+        }
+      }
+    </script>
+  </body>
+</html>
